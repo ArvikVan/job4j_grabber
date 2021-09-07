@@ -10,7 +10,7 @@ public class SqlRuDateTimeParserTest {
 
     @Test
     public void data() {
-        LocalDateTime localDateTime = new SqlRuDateTimeParser().parse("31 мая 00, 04:01");
+        LocalDateTime localDateTime = new SqlRuDateTimeParser().parse("31 май 00, 04:01");
         LocalDateTime res = LocalDateTime.of(
                 LocalDate.of(2000, 5, 31),
                 LocalTime.of(4, 1));

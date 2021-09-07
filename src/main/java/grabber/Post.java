@@ -31,7 +31,15 @@ public class Post {
         this.created = created;
     }
 
-    public Post() {
+    public Post(String title, String link, String description, LocalDateTime created) {
+        this.title = title;
+        this.link = link;
+        this.description = description;
+        this.created = created;
+    }
+
+    public Post(String title) {
+        this.title = title;
     }
 
     public int getId() {
@@ -93,4 +101,14 @@ public class Post {
         this.created = created;
     }
 
+    @Override
+    public String toString() {
+        return "Post{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", link='" + link + '\''
+                + ", description='" + description + '\''
+                + ", created=" + created
+                + '}';
+    }
 }

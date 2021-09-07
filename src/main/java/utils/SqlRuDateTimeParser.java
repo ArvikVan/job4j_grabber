@@ -18,7 +18,7 @@ public class SqlRuDateTimeParser implements DateTimeParser {
             Map.entry("фев", "02"),
             Map.entry("мар", "03"),
             Map.entry("апр", "04"),
-            Map.entry("мая", "05"),
+            Map.entry("май", "05"),
             Map.entry("июн", "06"),
             Map.entry("июл", "07"),
             Map.entry("авг", "08"),
