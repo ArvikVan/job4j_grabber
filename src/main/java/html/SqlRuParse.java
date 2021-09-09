@@ -2,9 +2,10 @@ package html;
 /**
  * класс описывает извлечение текста из html  по атрибутам
  * @author arvikv
- * @version 1.2
+ * @version 1.3
  * 1.1 парсим первые 5 страниц
  * 1.2 собираем все элементы парсинга в один класс
+ * 1.3 Парсер нужно использовать тот, что передается в конструкторе.
  */
 
 import grabber.Parse;
@@ -80,6 +81,6 @@ public class SqlRuParse implements Parse {
                 doc.select(".messageHeader").get(0).text(),
                 link,
                 doc.select(".msgBody").get(1).text(),
-                new SqlRuDateTimeParser().parse(dateCreation.text().substring(0, 16)));
+                dateTimeParser.parse(dateCreation.text().substring(0, 16)));
     }
 }
