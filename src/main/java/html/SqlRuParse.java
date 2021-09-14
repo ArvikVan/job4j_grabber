@@ -6,6 +6,7 @@ package html;
  * 1.1 парсим первые 5 страниц
  * 1.2 собираем все элементы парсинга в один класс
  * 1.3 Парсер нужно использовать тот, что передается в конструкторе.
+ * внесены коррективы в методы list и detail поскольку неточности тянут ошибки и исключения далее
  */
 
 import grabber.Parse;
@@ -59,10 +60,7 @@ public class SqlRuParse implements Parse {
         Elements row = doc.select(".postslisttopic");
         for (Element td : row) {
             Element href = td.child(0);
-            Post allPostModel = new Post(
-                    href.text()
-            );
-            posts.add(allPostModel);
+            posts.add(detail(href.attr("href")));
         }
         return posts;
     }
@@ -72,15 +70,16 @@ public class SqlRuParse implements Parse {
      * @param link на входе ссылка одного поста
      * @return на выходе объект с загруженными данными, согласно конструктора
      * @throws IOException исключения ловим
+     * переделан парсер времени
      */
     @Override
     public Post detail(String link) throws IOException {
         Document doc = Jsoup.connect(link).get();
-        Element dateCreation = doc.select(".msgFooter").get(0);
+        Element dateCreation = doc.select(".msgFooter").first();
         return new Post(
                 doc.select(".messageHeader").get(0).text(),
                 link,
                 doc.select(".msgBody").get(1).text(),
-                dateTimeParser.parse(dateCreation.text().substring(0, 16)));
+                dateTimeParser.parse(dateCreation.ownText().replace(" [] |", "")));
     }
 }
