@@ -1,4 +1,5 @@
 package grabber;
+
 /**
  * класс описывает работу с планировщиком, чтением и записью данных с сайта
  * @version 1.1
@@ -29,15 +30,18 @@ public class Grabber implements Grab {
 
     /**
      * метод описывает соединение чтение файла с настройками
+     *
      * @return на выходе настройки
      * @throws SQLException исключения ловим
      */
+
     public Store store() throws SQLException {
         return new PsqlStore(cfg);
     }
 
     /**
      * метод описывает планировщика
+     *
      * @return на выходе работающий планировщик
      * @throws SchedulerException исключения ловим
      */
@@ -49,6 +53,7 @@ public class Grabber implements Grab {
 
     /**
      * метод описывает чтение файла с настройками
+     *
      * @throws IOException ловим исключения, которые могут появиться
      */
     public void cfg() throws IOException {
@@ -59,11 +64,13 @@ public class Grabber implements Grab {
 
     /**
      * инициализаци задания
+     *
      * @param parse задание парсера сайта
      * @param store задание добавления в бд
      * @param scheduler расписание
      * @throws SchedulerException исключения ловим
      */
+
     @Override
     public void init(Parse parse, Store store, Scheduler scheduler) throws SchedulerException {
         JobDataMap data = new JobDataMap();
@@ -82,13 +89,16 @@ public class Grabber implements Grab {
         scheduler.scheduleJob(job, trigger);
     }
     public static class GrabJob implements Job {
+
         /**
          * метод описывает выполнение самого задания
+         *
          * @param context на входе контекст
          * @throws JobExecutionException исключения ловим
          * цикл используется обычный, поскольку использование итератора с одновременным изменением
          * листа приводит к исключению
          */
+
         @Override
         public void execute(JobExecutionContext context) {
             JobDataMap map = context.getJobDetail().getJobDataMap();
@@ -110,9 +120,11 @@ public class Grabber implements Grab {
 
     /**
      * метод описывает получение данных через браузер от граббера
+     *
      * @param store на входе результаты парсинга в бд
      *              post.toString().getBytes(Charset.forName("Windows-1251")), кодировочка понятная
      */
+
     public void web(Store store) {
         new Thread(() -> {
             try (ServerSocket server = new ServerSocket(Integer.parseInt(cfg.getProperty("port")))) {

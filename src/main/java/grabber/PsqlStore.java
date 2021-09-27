@@ -1,6 +1,8 @@
 package grabber;
+
 /**
  * класс описывает работу с бд (добавление, поиск по id, просмотр всего списка)
+ *
  * @author arvikv
  * @version 1.0
  */
@@ -20,9 +22,11 @@ public class PsqlStore implements Store, AutoCloseable {
 
     /**
      * метод описывает поиск файла с настройками, его чтение и соединение с бд
+     *
      * @param cfg на входе свойства по которым войдем с бд
      * @throws SQLException исключения ловим
      */
+
     public PsqlStore(Properties cfg) throws SQLException {
         try (InputStream in = PsqlStore.class.getClassLoader().getResourceAsStream("app.properties")) {
             cfg.load(in);
@@ -39,10 +43,12 @@ public class PsqlStore implements Store, AutoCloseable {
 
     /**
      * метод описывает сохранение в бд поста
+     *
      * @param post на входе пост(модель данных)
      *             не забываем про таблицу в бд, есть уникальное поле которое не позволяет
      *             добавлять посты с одинаковыми ссылками
      */
+
     @Override
     public void save(Post post) {
         try (PreparedStatement preparedStatement = cnn.prepareStatement(
@@ -65,8 +71,10 @@ public class PsqlStore implements Store, AutoCloseable {
 
     /**
      * метод описывает получение всей таблицы, по запросу
+     *
      * @return на выходе список всех постов, всей таблицы
      */
+
     @Override
     public List<Post> getAll() {
         List<Post> list = new ArrayList<>();
@@ -93,9 +101,11 @@ public class PsqlStore implements Store, AutoCloseable {
 
     /**
      * метод описывает поиск по id
+     *
      * @param id на входе id по которому будем искать
      * @return на выходе найденный пост
      */
+
     @Override
     public Post findById(int id) {
         Post post = null;

@@ -8,12 +8,16 @@ import java.io.IOException;
 
 /**
  * класс описывает загрузку деталей объявлений
+ *
  * @author arvikv
  * @version 1.0
  */
+
 public class PostSqlRuParse {
+
     /**
      * метод описывает считывание данных и даты создания объявления
+     *
      * @param url на входе ссылка на страницу которую необходимо спарсить
      * @throws IOException ловим исключения
      * получаем документ
@@ -21,6 +25,7 @@ public class PostSqlRuParse {
      * получаем элемент с id msgFooter c индексом 0, он один
      * т.к. в теге не только время то берем первые 16 знаков, с датой и временем
      */
+
     public void postLoad(String url) throws IOException {
         Document doc = Jsoup.connect(url).get();
         Element description = doc.select(".msgBody").get(1);
