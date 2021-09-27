@@ -71,7 +71,7 @@ public class SqlRuParse implements Parse {
 
     /**
      * метод загружает все детали одного поста
-     * 
+     *
      * @param link на входе ссылка одного поста
      * @return на выходе объект с загруженными данными, согласно конструктора
      * @throws IOException исключения ловим

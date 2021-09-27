@@ -4,7 +4,7 @@ package gc;
  * класс показывает работу с разными сборщиками
  * @author arvikv
  * @version 1.0
- * Edit Configuration:
+ * Edit Configuration://
  * - Serial => -XX:+UseSerialGC
  * - Parallel => -XX:+UseParallelGC
  * - CMS => -XX:+UseConcMarkSweepGC (допуступен до JDK 14)
