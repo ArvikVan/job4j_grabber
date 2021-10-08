@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class MaxMinTest {
 
     @Test
-    public void Max() {
+    public void max() {
         MaxMin max = new MaxMin();
         List<Integer> list = List.of(1, 12, 4, 6, 52, 540);
         Comparator<Integer> comparator = Integer::compareTo;
