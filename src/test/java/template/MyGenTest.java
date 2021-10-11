@@ -25,7 +25,7 @@ public class MyGenTest {
     }
 
     @Ignore
-    @Test(expected = Exception.class)
+    @Test(expected = IllegalArgumentException.class)
     public void whenManyKeys() {
         MyGen myGen = new MyGen();
         String produce = myGen.produce("I am a ${name}, Who are ${subject}? ",
