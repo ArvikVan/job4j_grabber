@@ -20,13 +20,13 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new ReportEngine(store);
-        String expect = "Name; Hired; Fired; Salary;" +
-                System.lineSeparator() +
-                worker.getName() + ";" +
-                worker.getHired() + ";" +
-                worker.getFired() + ";" +
-                worker.getSalary() + ";" +
-                System.lineSeparator();
+        String expect = "Name; Hired; Fired; Salary;"
+                + System.lineSeparator()
+                + worker.getName() + ";"
+                + worker.getHired() + ";"
+                + worker.getFired() + ";"
+                + worker.getSalary() + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -37,12 +37,12 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new BuhReport(store);
-        String expect = "Name; Hired; Fired; SalaryInDollar;" +
-                worker.getName() + ";" +
-                worker.getHired() + ";" +
-                worker.getFired() + ";" +
-                worker.getSalary() / 71 + ";" +
-                System.lineSeparator();
+        String expect = "Name; Hired; Fired; SalaryInDollar;"
+                + worker.getName() + ";"
+                + worker.getHired() + ";"
+                + worker.getFired() + ";"
+                + worker.getSalary() / 71 + ";"
+                + System.lineSeparator();
         assertThat(engine.generate(em -> true), is(expect));
     }
 
@@ -73,18 +73,18 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
         Report engine = new DevelopReport(store);
-        String expect = "<!DOCTYPE HTML>" +
-                "<html><body><table>" +
-                "<tr><td>Name</td>" +
-                "<td>Hired</td>" +
-                "<td>Fired</td>" +
-                "<td>Salary</td></tr>" +
-                "<tr><td>" + worker.getName() + "</td>" +
-                "<td>" + worker.getHired() + "</td>" +
-                "<td>" + worker.getFired() + "</td>" +
-                "<td>" + worker.getSalary() + "</td></tr>" +
-                System.lineSeparator() +
-                "</table></body></html>";
+        String expect = "<!DOCTYPE HTML>"
+                + "<html><body><table>"
+                + "<tr><td>Name</td>"
+                + "<td>Hired</td>"
+                + "<td>Fired</td>"
+                + "<td>Salary</td></tr>"
+                + "<tr><td>" + worker.getName() + "</td>"
+                + "<td>" + worker.getHired() + "</td>"
+                + "<td>" + worker.getFired() + "</td>"
+                + "<td>" + worker.getSalary() + "</td></tr>"
+                + System.lineSeparator()
+                + "</table></body></html>";
         assertThat(engine.generate(em -> true), is(expect));
     }
 
