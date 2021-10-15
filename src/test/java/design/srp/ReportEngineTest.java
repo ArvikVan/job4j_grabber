@@ -1,7 +1,9 @@
 package design.srp;
 
+import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static org.hamcrest.Matchers.is;
@@ -85,6 +87,55 @@ public class ReportEngineTest {
                 + "<td>" + worker.getSalary() + "</td></tr>"
                 + System.lineSeparator()
                 + "</table></body></html>";
+        assertThat(engine.generate(em -> true), is(expect));
+    }
+
+    @Test
+    public void WhenJSONReport() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        Employee worker = new Employee("Ivan", now, now, 100);
+        Employee worker2 = new Employee("Semen", now, now, 200);
+        store.add(worker);
+        store.add(worker2);
+        Report engine = new JSONReport(store);
+        StringBuilder expect = new StringBuilder();
+        var gson = new GsonBuilder().create();
+        expect.append("[")
+                .append(gson.toJson(worker))
+                .append(",")
+                .append(gson.toJson(worker2))
+                .append("]");
+
+
+        assertThat(engine.generate(em -> true), is(expect.toString()));
+    }
+
+    @Test
+    public void WhenXMLReport() {
+        MemStore store = new MemStore();
+        Calendar now = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        Employee worker = new Employee("Ivan", now, now, 100);
+        Employee worker2 = new Employee("Semen", now, now, 200);
+        store.add(worker);
+        store.add(worker2);
+        Report engine = new XMLReport(store);
+        String expect = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" + "\n" +
+                "<employees>\n" +
+                "    <employee>\n" +
+                "        <fired>" + dateFormat.format(worker.getHired().getTime()) + "</fired>\n" +
+                "        <hired>" + dateFormat.format(worker.getHired().getTime()) + "</hired>\n" +
+                "        <name>Ivan</name>\n" +
+                "        <salary>100.0</salary>\n" +
+                "    </employee>\n" +
+                "    <employee>\n" +
+                "        <fired>" + dateFormat.format(worker.getHired().getTime()) + "</fired>\n" +
+                "        <hired>" + dateFormat.format(worker.getHired().getTime()) + "</hired>\n" +
+                "        <name>Semen</name>\n" +
+                "        <salary>200.0</salary>\n" +
+                "    </employee>\n" +
+                "</employees>\n";
         assertThat(engine.generate(em -> true), is(expect));
     }
 
