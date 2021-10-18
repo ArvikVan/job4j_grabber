@@ -9,11 +9,17 @@ import java.util.List;
  * @since 18.10.2021
  */
 public class PassCarParking implements Parking {
+    private int passCarParkingSize;
     List<Car> passCarParkingList = new ArrayList<>();
 
-    @Override
-    public void add(Car car) {
+    public PassCarParking(int passCarParkingSize) {
+        this.passCarParkingSize = passCarParkingSize;
+    }
 
+    @Override
+    public boolean addCar(Car car) {
+
+        return false;
     }
 
     @Override

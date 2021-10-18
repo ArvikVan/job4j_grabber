@@ -15,5 +15,9 @@ public class Distribution {
         this.parkingList = parkingList;
     }
 
-
+    public void distribution(Car car) {
+        for (Parking parking : parkingList) {
+            parking.addCar(car);
+        }
+    }
 }

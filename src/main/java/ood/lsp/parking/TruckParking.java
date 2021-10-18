@@ -10,11 +10,21 @@ import java.util.List;
  * @since 18.10.2021
  */
 public class TruckParking implements Parking {
+    private int truckParkingSize;
     List<Car> truckParkingList = new ArrayList<>();
 
-    @Override
-    public void add(Car car) {
+    public TruckParking(int truckParkingSize) {
+        this.truckParkingSize = truckParkingSize;
+    }
 
+    @Override
+    public boolean addCar(Car car) {
+        boolean result = false;
+        if (condition(car)) {
+            truckParkingList.add(car);
+            result = true;
+        }
+        return result;
     }
 
     @Override
@@ -24,6 +34,6 @@ public class TruckParking implements Parking {
 
     @Override
     public boolean condition(Car car) {
-        return false;
+        return true;
     }
 }

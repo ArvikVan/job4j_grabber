@@ -9,7 +9,7 @@ import java.util.List;
  * @since 18.10.2021
  */
 public interface Parking {
-    void add(Car car);
+    boolean addCar(Car car);
     List<Car> getAll();
     boolean condition(Car car);
 }
