@@ -11,5 +11,5 @@ import java.util.List;
 public interface Parking {
     boolean addCar(Car car);
     List<Car> getAll();
-    boolean condition(Car car);
+    int condition(Car car);
 }

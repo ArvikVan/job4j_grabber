@@ -11,7 +11,9 @@ import java.util.List;
  */
 public class TruckParking implements Parking {
     private int truckParkingSize;
+
     List<Car> truckParkingList = new ArrayList<>();
+    List<Car> passCarParkingList = new ArrayList<>();
 
     public TruckParking(int truckParkingSize) {
         this.truckParkingSize = truckParkingSize;
@@ -20,8 +22,9 @@ public class TruckParking implements Parking {
     @Override
     public boolean addCar(Car car) {
         boolean result = false;
-        if (condition(car)) {
-            truckParkingList.add(car);
+        if (car.getSize() > 1 && truckParkingSize >= 1) {
+            passCarParkingList.add(car);
+            truckParkingSize--;
             result = true;
         }
         return result;
@@ -29,11 +32,15 @@ public class TruckParking implements Parking {
 
     @Override
     public List<Car> getAll() {
-        return truckParkingList;
+        List<Car> list = new ArrayList<>();
+        list.addAll(passCarParkingList);
+        list.addAll(truckParkingList);
+        return list;
     }
 
     @Override
-    public boolean condition(Car car) {
-        return true;
+    public int condition(Car car) {
+        return truckParkingSize;
     }
+
 }

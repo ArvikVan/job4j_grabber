@@ -18,17 +18,29 @@ public class PassCarParking implements Parking {
 
     @Override
     public boolean addCar(Car car) {
+        boolean result = false;
+        int size = car.getSize();
+        if (size == 1 && passCarParkingSize >= size) {
+            passCarParkingList.add(car);
+            passCarParkingSize--;
+            result = true;
+        }
+        if (size > 1 && passCarParkingSize >= size) {
+            passCarParkingList.add(car);
+            passCarParkingSize--;
+            result = true;
+        }
+        return result;
 
-        return false;
     }
 
     @Override
     public List<Car> getAll() {
-        return null;
+        return passCarParkingList;
     }
 
     @Override
-    public boolean condition(Car car) {
-        return false;
+    public int condition(Car car) {
+        return passCarParkingSize;
     }
 }
