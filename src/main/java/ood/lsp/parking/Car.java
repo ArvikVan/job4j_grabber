@@ -5,16 +5,21 @@ import java.util.Objects;
 /**
  * Модель данных машин
  * @author arvikv
- * @version 1.0
+ * @version 1.1
  * @since 18.10.2021
+ * 1.1 Car надо сделать абстрактным, раз от него идет наследование.
  */
-public class Car {
+public abstract class Car {
     protected String name;
     protected int size;
 
     public Car(String name, int size) {
         this.name = name;
         this.size = size;
+    }
+
+    public Car(String name) {
+        this.name = name;
     }
 
     public String getName() {

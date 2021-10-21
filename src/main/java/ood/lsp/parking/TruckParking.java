@@ -6,14 +6,14 @@ import java.util.List;
 /**
  * Реализуем интерфейс в классе для грузовиков
  * @author arvikv
- * @version 1.0
+ * @version 1.1
  * @since 18.10.2021
+ * 1.1 Второй список надо удалить, потому что на места для грузовых мы не можем парковать легковые машины.
  */
 public class TruckParking implements Parking {
     private int truckParkingSize;
 
     List<Car> truckParkingList = new ArrayList<>();
-    List<Car> passCarParkingList = new ArrayList<>();
 
     public TruckParking(int truckParkingSize) {
         this.truckParkingSize = truckParkingSize;
@@ -23,7 +23,7 @@ public class TruckParking implements Parking {
     public boolean addCar(Car car) {
         boolean result = false;
         if (car.getSize() > 1 && truckParkingSize >= 1) {
-            passCarParkingList.add(car);
+            truckParkingList.add(car);
             truckParkingSize--;
             result = true;
         }
@@ -32,10 +32,7 @@ public class TruckParking implements Parking {
 
     @Override
     public List<Car> getAll() {
-        List<Car> list = new ArrayList<>();
-        list.addAll(passCarParkingList);
-        list.addAll(truckParkingList);
-        return list;
+        return new ArrayList<>(truckParkingList);
     }
 
     @Override

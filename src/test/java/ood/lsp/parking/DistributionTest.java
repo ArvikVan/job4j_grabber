@@ -12,11 +12,13 @@ import java.util.List;
  * @since 18.10.2021
  */
 public class DistributionTest {
+    PassengerCar passengerCar;
+    Truck truck;
     @Test
     public void parkingTruck() {
         List<Car> carList = new ArrayList<>();
         Parking parking = new TruckParking(3);
-        Car car = new Car("Volvo", 2);
+        Car car = new Truck("Volvo", 2);
         carList.add(car);
         Assert.assertTrue(parking.addCar(car));
         Assert.assertEquals(carList, parking.getAll());
@@ -26,8 +28,8 @@ public class DistributionTest {
     public void fillPassParking() {
         List<Car> carList = new ArrayList<>();
         Parking parking = new PassCarParking(2);
-        Car car1 = new Car("dodge", 1);
-        Car car2 = new Car("toyota", 1);
+        Car car1 = new PassengerCar("dodge");
+        Car car2 = new PassengerCar("toyota");
         carList.add(car1);
         carList.add(car2);
         Assert.assertTrue(parking.addCar(car1));
@@ -41,9 +43,9 @@ public class DistributionTest {
     public void fillTruckParking() {
         List<Car> carList = new ArrayList<>();
         Parking parking = new TruckParking(6);
-        Car car = new Car("Volvo", 2);
-        Car car2 = new Car("Volvo", 2);
-        Car car3 = new Car("Volvo", 2);
+        Car car = new Truck("Volvo", 2);
+        Car car2 = new Truck("Volvo", 2);
+        Car car3 = new Truck("Volvo", 2);
         carList.add(car);
         carList.add(car2);
         carList.add(car3);
