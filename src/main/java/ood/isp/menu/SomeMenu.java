@@ -44,15 +44,33 @@ public class SomeMenu implements Menu {
         }
     }
 
+    private void console() {
+        Out out = new SomeOut();
+    }
+
+    public void init(Scanner scanner) {
+        boolean run = true;
+        while (run) {
+            console();
+            System.out.println("Select: ");
+            String select = scanner.nextLine();
+            if (!select.equals("Exit")) {
+                System.out.println("Пользователь выбрал меню: " + select);
+            } else {
+                run = false;
+            }
+        }
+    }
     public static void main(String[] args) {
         SomeMenu menu = new SomeMenu();
+        Scanner scanner = new Scanner(System.in);
         menu.add("Menu", new Item("Задача 1.", new SomeAction()));
         menu.add("1.", new Item("--Задача 1.1.", new SomeAction()));
         menu.add("1.", new Item("--Задача 1.2.", new SomeAction()));
         menu.add("1.1.", new Item("----Задача 1.1.1.", new SomeAction()));
         menu.add("1.1.", new Item("----Задача 1.1.2.", new SomeAction()));
-        menu.add("Exit", new Item("out", new SomeAction()));
+        menu.add("Exit", new Item("Out", new SomeAction()));
         menu.print();
-        //menu.init();
+        menu.init(scanner);
     }
 }
