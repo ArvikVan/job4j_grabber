@@ -61,6 +61,7 @@ public class SomeMenu implements Menu {
             }
         }
     }
+    
     public static void main(String[] args) {
         SomeMenu menu = new SomeMenu();
         Scanner scanner = new Scanner(System.in);
