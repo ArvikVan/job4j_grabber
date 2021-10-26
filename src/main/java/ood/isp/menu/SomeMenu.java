@@ -2,53 +2,57 @@ package ood.isp.menu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
- * класс описывает меню
  * @author arvikv
  * @version 1.0
- * @since 22.10.2021
+ * @since 26.10.2021
  */
-public class SomeMenu implements IMenu {
-    List<Item> itemList = new ArrayList<>();
+public class SomeMenu implements Menu {
+    private List<Item> list = new ArrayList<>();
 
-    /**
-     * метод для добавление в лист итема
-     * @param item на входе итем который нужно добавить
-     */
     @Override
-    public void add(Item item) {
-        itemList.add(item);
+    public void add(String parentName, Item child) {
+        if (parentName.equals("Menu")) {
+            list.add(child);
+        } else {
+            add(parentName, child, list);
+        }
     }
 
-    /**
-     * метод выводит меню
-     * @return на выходе меню
-     * бежим по листу и выводим ид итема
-     */
-    @Override
-    public List<Item> getMenu() {
-        for (Item item : itemList) {
-            System.out.println(item.itemId() + " Item");
+    private void add(String parentName, Item child, List<Item> list) {
+        for (Item item : list) {
+            if (item.getName().contains(parentName)) {
+                item.addItem(child);
+            } else {
+                add(parentName, child, item.getItemList());
+            }
         }
-        return itemList;
+    }
+
+    public void print() {
+        for (Item item : list) {
+            print(item);
+        }
+    }
+
+    private void print(Item item) {
+        System.out.println(item.getName());
+        for (Item itemChild : item.getItemList()) {
+            print(itemChild);
+        }
     }
 
     public static void main(String[] args) {
-        IMenu menu = new SomeMenu();
-
-        Item item1 = new MyItem("1.", "ItemName1");
-        Item item11 = new MyItem(" 1.1.", "ItemName1.1");
-        Item item111 = new MyItem(" 1.1.1.", "ItemName.1.1.");
-        Item item2 = new MyItem("2.", "ItemName2");
-
-        menu.add(item1);
-        menu.add(item11);
-        menu.add(item111);
-        menu.add(item2);
-        List<Item> result = menu.getMenu();
-        Action.action(result);
-
+        SomeMenu menu = new SomeMenu();
+        menu.add("Menu", new Item("Задача 1.", new SomeAction()));
+        menu.add("1.", new Item("--Задача 1.1.", new SomeAction()));
+        menu.add("1.", new Item("--Задача 1.2.", new SomeAction()));
+        menu.add("1.1.", new Item("----Задача 1.1.1.", new SomeAction()));
+        menu.add("1.1.", new Item("----Задача 1.1.2.", new SomeAction()));
+        menu.add("Exit", new Item("out", new SomeAction()));
+        menu.print();
+        //menu.init();
     }
-
 }
