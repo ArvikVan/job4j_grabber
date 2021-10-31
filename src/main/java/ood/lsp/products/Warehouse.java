@@ -37,4 +37,9 @@ public class Warehouse implements Store {
     public boolean condition(Food food) {
         return  Percent.percentation(food) < 25;
     }
+
+    @Override
+    public void removeList() {
+        warhouseFoodList.clear();
+    }
 }

@@ -7,10 +7,12 @@ import java.util.List;
  * @author arvikv
  * @version 1.0
  * @since 17.10.2021
+ * добавлен метод очистки листа
  *
  */
 public interface Store {
     void save(Food food);
     List<Food> getAll();
     boolean condition(Food food);
+    void removeList();
 }

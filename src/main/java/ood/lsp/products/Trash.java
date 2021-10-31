@@ -29,4 +29,9 @@ public class Trash implements Store {
     public boolean condition(Food food) {
         return LocalDate.now().isAfter(food.getExpiryDate());
     }
+
+    @Override
+    public void removeList() {
+        trashFoodList.clear();
+    }
 }

@@ -1,5 +1,6 @@
 package ood.lsp.products;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,9 +16,30 @@ public class ControllQuality {
         this.storeList = storeList;
     }
 
+    /**
+     * метод отвечает за распределение продуктов
+     * @param food на входе продукт
+     */
     public void distribution(Food food) {
             for (Store store : storeList) {
                 store.save(food);
             }
+    }
+
+    /**
+     * метод отвечает за извлечение и перераспределение продуктов из
+     * storeList в listForResort
+     */
+    public void resort() {
+        List<Food> listForResort = new ArrayList<>();
+        for (Store store : storeList) {
+            listForResort.addAll(store.getAll());
+            store.removeList();
+        }
+
+        for (Food food : listForResort) {
+            distribution(food);
+        }
+
     }
 }

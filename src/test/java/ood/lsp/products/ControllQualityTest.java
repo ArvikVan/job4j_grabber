@@ -67,6 +67,21 @@ public class ControllQualityTest {
     }
 
     @Test
+    public void whenResort() {
+        LocalDate createDateShop = currentDate.minusDays(1);
+        LocalDate expiryDateShop = currentDate.plusDays(4);
+        Food shop = new Food("Milk", createDateShop, expiryDateShop, 100, 20);
+        Food shop2 = new Food("Kilk", createDateShop, expiryDateShop, 100, 20);
+        List<Food> foodList = List.of(shop, shop2);
+        controllQuality.resort();
+        List<Food> expect = List.of(
+                new Food("Milk", createDateShop, expiryDateShop, 100, 20),
+                new Food("Kilk", createDateShop, expiryDateShop, 100, 20)
+        );
+        assertEquals(foodList, expect);
+    }
+
+    @Test
     public void whenTrash() {
         LocalDate createDate = currentDate.minusDays(10);
         LocalDate expiryDate = currentDate.minusDays(1);
